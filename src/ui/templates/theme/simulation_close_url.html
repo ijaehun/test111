@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tables {% endblock %}
+
+
+{% block css %}
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+{% block container_fluid %}
+
+<script>
+
+function send() {
+    alert("시뮬레이션 진행 중");
+    document.getElementById("contents").submit();
+    }
+</script>
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">폐교 산출 시뮬레이션</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <form id="contents" name="contents" method="get" action="{% url 'users:simulation_close_results_url' %}">
+                            {% csrf_token %}
+                            <p>
+                            <label for="schoollevel">학교 유형 선택 : </label>
+                            <select id="schoollevel" name="schoollevel">
+                                <option selected disabled>선택해주세요</option>
+                                <option value="초등학교">초등학교</option>
+                                <option value="중학교">중학교</option>
+                                <option value="고등학교">고등학교</option>
+                            </select>
+                            </p>
+
+                            <p>
+                            <label for="prelevel">학교 유형 선택 : </label>
+                            <select id="prelevel" name="prelevel">
+                                <option selected disabled>선택해주세요</option>
+                                <option value="교수님">인공지능 기반</option>
+                                <option value="저위">통계청 결과 기반 저위</option>
+                                <option value="중위">통계청 결과 기반 중위</option>
+                                <option value="무이동">통계청 결과 기반 무이동</option>
+                            </select>
+                            </p>
+
+                            <p>기준년도 : <input name="start_num" type="text"></p>
+
+                            <button type="button" onclick="send();">시뮬레이션</button>
+
+                        </form>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js_body %}
+<!-- Data Tables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}

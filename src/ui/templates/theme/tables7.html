@@ -1,0 +1,572 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tables {% endblock %}
+
+
+{% block css %}
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">학생 수 예측</h1>
+    <p class="mb-4">대구광역시 10개년 지역별 학생 수 예측 5학년</p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <!-- <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div> -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>예측년도</th>
+                            <th>월배</th>
+                            <th>성서</th>
+                            <th>수성</th>
+                            <th>칠곡</th>
+                            <th>동부</th>
+                            <th>서부</th>
+                            <th>북부</th>
+                            <th>남부</th>
+                            <th>동대구</th>
+                            <th>달성</th>
+                            <th>중부</th>
+                            <th>모델</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for db in results %}
+                            <tr>
+                                <td>{{ db.예측년도 }}</td>
+                                <td>{{ db.월배 }}</td>
+                                <td>{{ db.성서 }}</td>
+                                <td>{{ db.수성 }}</td>
+                                <td>{{ db.칠곡 }}</td>
+                                <td>{{ db.동부 }}</td>
+                                <td>{{ db.서부 }}</td>
+                                <td>{{ db.북부 }}</td>
+                                <td>{{ db.남부 }}</td>
+                                <td>{{ db.동대구 }}</td>
+                                <td>{{ db.달성 }}</td>
+                                <td>{{ db.중부 }}</td>
+                                <td>{{ db.모델 }}</td>
+                            </tr>
+                        {% endfor %}                      
+                    </tbody>
+                </table>
+                    <tfoot>
+                        <tr>
+                            <td colspan="15">
+                                <div class="chart-area">
+                                    <script>
+                                        window.onload = function () {
+                                        
+                                        var chart1 = new CanvasJS.Chart("chartContainer1", {
+                                            animationEnabled: true,
+                                            title:{
+                                                text: "지역별 학생 수 예측 5학년 SSM"
+                                            },
+                                            axisX: {
+                                                lineColor: "black",
+                                                labelFontColor: "black"
+                                            },
+                                            axisY: {
+                                                gridThickness: 0,
+                                                title: "예측값",
+                                                suffix: " 명",
+                                                titleFontColor: "black",
+                                                labelFontColor: "black"
+                                            },
+                                            toolTip: {
+                                                shared: true
+                                            },
+                                            legend: {
+                                                cursor: "pointer",
+                                                itemmouseover: function(e) {
+                                                    e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
+                                                    e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
+                                                    e.chart.render();
+                                                },
+                                                itemmouseout: function(e) {
+                                                    e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
+                                                    e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
+                                                    e.chart.render();
+                                                },
+                                                itemclick: function (e) {
+                                                    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                                        e.dataSeries.visible = false;
+                                                    } else {
+                                                        e.dataSeries.visible = true;
+                                                    }
+                                                    e.chart.render();
+                                                }
+                                            },
+                                            data: [{
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "월배",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 3373 },
+                                                    { x: new Date(2024, 0), y: 3275 },
+                                                    { x: new Date(2025, 0), y: 3130 },
+                                                    { x: new Date(2026, 0), y: 3129 },
+                                                    { x: new Date(2027, 0), y: 3071 },
+                                                    { x: new Date(2028, 0), y: 2799 },
+                                                    { x: new Date(2029, 0), y: 2475 },
+                                                    { x: new Date(2030, 0), y: 2277 },
+                                                    { x: new Date(2031, 0), y: 2025 }
+                                                ]
+                                             },
+                                            {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "성서",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 2720 },
+                                                    { x: new Date(2024, 0), y: 2609 },
+                                                    { x: new Date(2025, 0), y: 2401 },
+                                                    { x: new Date(2026, 0), y: 2482 },
+                                                    { x: new Date(2027, 0), y: 2328 },
+                                                    { x: new Date(2028, 0), y: 2082 },
+                                                    { x: new Date(2029, 0), y: 1924 },
+                                                    { x: new Date(2030, 0), y: 1653 },
+                                                    { x: new Date(2031, 0), y: 1451 }
+                                                ]
+                                             },
+                                            {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "수성",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 3818 },
+                                                    { x: new Date(2024, 0), y: 3822 },
+                                                    { x: new Date(2025, 0), y: 3784 },
+                                                    { x: new Date(2026, 0), y: 3633 },
+                                                    { x: new Date(2027, 0), y: 3753 },
+                                                    { x: new Date(2028, 0), y: 3456 },
+                                                    { x: new Date(2029, 0), y: 3896 },
+                                                    { x: new Date(2030, 0), y: 2883 },
+                                                    { x: new Date(2031, 0), y: 2569 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "칠곡",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1925 },
+                                                    { x: new Date(2024, 0), y: 1791 },
+                                                    { x: new Date(2025, 0), y: 1698 },
+                                                    { x: new Date(2026, 0), y: 1774 },
+                                                    { x: new Date(2027, 0), y: 1566 },
+                                                    { x: new Date(2028, 0), y: 1457 },
+                                                    { x: new Date(2029, 0), y: 1346 },
+                                                    { x: new Date(2030, 0), y: 1033 },
+                                                    { x: new Date(2031, 0), y: 972 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "동부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1992 },
+                                                    { x: new Date(2024, 0), y: 1942 },
+                                                    { x: new Date(2025, 0), y: 1777 },
+                                                    { x: new Date(2026, 0), y: 1827 },
+                                                    { x: new Date(2027, 0), y: 1779 },
+                                                    { x: new Date(2028, 0), y: 1579 },
+                                                    { x: new Date(2029, 0), y: 1465 },
+                                                    { x: new Date(2030, 0), y: 1332 },
+                                                    { x: new Date(2031, 0), y: 1147 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "서부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 807 },
+                                                    { x: new Date(2024, 0), y: 725 },
+                                                    { x: new Date(2025, 0), y: 677 },
+                                                    { x: new Date(2026, 0), y: 733 },
+                                                    { x: new Date(2027, 0), y: 584 },
+                                                    { x: new Date(2028, 0), y: 549 },
+                                                    { x: new Date(2029, 0), y: 524 },
+                                                    { x: new Date(2030, 0), y: 327 },
+                                                    { x: new Date(2031, 0), y: 327 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "북부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1568 },
+                                                    { x: new Date(2024, 0), y: 1516 },
+                                                    { x: new Date(2025, 0), y: 1419 },
+                                                    { x: new Date(2026, 0), y: 1437 },
+                                                    { x: new Date(2027, 0), y: 1381 },
+                                                    { x: new Date(2028, 0), y: 1242 },
+                                                    { x: new Date(2029, 0), y: 1114 },
+                                                    { x: new Date(2030, 0), y: 998 },
+                                                    { x: new Date(2031, 0), y: 877 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "남부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 885 },
+                                                    { x: new Date(2024, 0), y: 817 },
+                                                    { x: new Date(2025, 0), y: 782 },
+                                                    { x: new Date(2026, 0), y: 817 },
+                                                    { x: new Date(2027, 0), y: 711 },
+                                                    { x: new Date(2028, 0), y: 668 },
+                                                    { x: new Date(2029, 0), y: 614 },
+                                                    { x: new Date(2030, 0), y: 459 },
+                                                    { x: new Date(2031, 0), y: 440 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "동대구",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1029 },
+                                                    { x: new Date(2024, 0), y: 944 },
+                                                    { x: new Date(2025, 0), y: 905 },
+                                                    { x: new Date(2026, 0), y: 960 },
+                                                    { x: new Date(2027, 0), y: 829 },
+                                                    { x: new Date(2028, 0), y: 788 },
+                                                    { x: new Date(2029, 0), y: 746 },
+                                                    { x: new Date(2030, 0), y: 544 },
+                                                    { x: new Date(2031, 0), y: 530 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "달성",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1327 },
+                                                    { x: new Date(2024, 0), y: 1437 },
+                                                    { x: new Date(2025, 0), y: 1344 },
+                                                    { x: new Date(2026, 0), y: 1215 },
+                                                    { x: new Date(2027, 0), y: 1494 },
+                                                    { x: new Date(2028, 0), y: 1265 },
+                                                    { x: new Date(2029, 0), y: 1017 },
+                                                    { x: new Date(2030, 0), y: 1309 },
+                                                    { x: new Date(2031, 0), y: 1032 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "중부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 673 },
+                                                    { x: new Date(2024, 0), y: 656 },
+                                                    { x: new Date(2025, 0), y: 602 },
+                                                    { x: new Date(2026, 0), y: 615 },
+                                                    { x: new Date(2027, 0), y: 598 },
+                                                    { x: new Date(2028, 0), y: 531 },
+                                                    { x: new Date(2029, 0), y: 486 },
+                                                    { x: new Date(2030, 0), y: 443 },
+                                                    { x: new Date(2031, 0), y: 381 }
+                                                ]
+                                            }]
+                                        });
+
+                                        var chart2 = new CanvasJS.Chart("chartContainer2", {
+                                            animationEnabled: true,
+                                            title:{
+                                                text: "지역별 학생 수 예측 5학년 DLA"
+                                            },
+                                            axisX: {
+                                                lineColor: "black",
+                                                labelFontColor: "black"
+                                            },
+                                            axisY: {
+                                                gridThickness: 0,
+                                                title: "예측값",
+                                                suffix: " 명",
+                                                titleFontColor: "black",
+                                                labelFontColor: "black"
+                                            },
+                                            toolTip: {
+                                                shared: true
+                                            },
+                                            legend: {
+                                                cursor: "pointer",
+                                                itemmouseover: function(e) {
+                                                    e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness * 2;
+                                                    e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize + 2;
+                                                    e.chart.render();
+                                                },
+                                                itemmouseout: function(e) {
+                                                    e.dataSeries.lineThickness = e.chart.data[e.dataSeriesIndex].lineThickness / 2;
+                                                    e.dataSeries.markerSize = e.chart.data[e.dataSeriesIndex].markerSize - 2;
+                                                    e.chart.render();
+                                                },
+                                                itemclick: function (e) {
+                                                    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                                        e.dataSeries.visible = false;
+                                                    } else {
+                                                        e.dataSeries.visible = true;
+                                                    }
+                                                    e.chart.render();
+                                                }
+                                            },
+                                            data: [{
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "월배",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 3373 },
+                                                    { x: new Date(2024, 0), y: 3275 },
+                                                    { x: new Date(2025, 0), y: 3130 },
+                                                    { x: new Date(2026, 0), y: 3129 },
+                                                    { x: new Date(2027, 0), y: 3071 },
+                                                    { x: new Date(2028, 0), y: 2799 },
+                                                    { x: new Date(2029, 0), y: 2475 },
+                                                    { x: new Date(2030, 0), y: 2277 },
+                                                    { x: new Date(2031, 0), y: 2025 }
+                                                ]
+                                             },
+                                            {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "성서",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 2720 },
+                                                    { x: new Date(2024, 0), y: 2609 },
+                                                    { x: new Date(2025, 0), y: 2401 },
+                                                    { x: new Date(2026, 0), y: 2482 },
+                                                    { x: new Date(2027, 0), y: 2328 },
+                                                    { x: new Date(2028, 0), y: 2082 },
+                                                    { x: new Date(2029, 0), y: 1924 },
+                                                    { x: new Date(2030, 0), y: 1653 },
+                                                    { x: new Date(2031, 0), y: 1451 }
+                                                ]
+                                             },
+                                            {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "수성",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 3818 },
+                                                    { x: new Date(2024, 0), y: 3822 },
+                                                    { x: new Date(2025, 0), y: 3784 },
+                                                    { x: new Date(2026, 0), y: 3633 },
+                                                    { x: new Date(2027, 0), y: 3753 },
+                                                    { x: new Date(2028, 0), y: 3456 },
+                                                    { x: new Date(2029, 0), y: 3896 },
+                                                    { x: new Date(2030, 0), y: 2883 },
+                                                    { x: new Date(2031, 0), y: 2569 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "칠곡",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1925 },
+                                                    { x: new Date(2024, 0), y: 1791 },
+                                                    { x: new Date(2025, 0), y: 1698 },
+                                                    { x: new Date(2026, 0), y: 1774 },
+                                                    { x: new Date(2027, 0), y: 1566 },
+                                                    { x: new Date(2028, 0), y: 1457 },
+                                                    { x: new Date(2029, 0), y: 1346 },
+                                                    { x: new Date(2030, 0), y: 1033 },
+                                                    { x: new Date(2031, 0), y: 972 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "동부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1992 },
+                                                    { x: new Date(2024, 0), y: 1942 },
+                                                    { x: new Date(2025, 0), y: 1777 },
+                                                    { x: new Date(2026, 0), y: 1827 },
+                                                    { x: new Date(2027, 0), y: 1779 },
+                                                    { x: new Date(2028, 0), y: 1579 },
+                                                    { x: new Date(2029, 0), y: 1465 },
+                                                    { x: new Date(2030, 0), y: 1332 },
+                                                    { x: new Date(2031, 0), y: 1147 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "서부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 807 },
+                                                    { x: new Date(2024, 0), y: 725 },
+                                                    { x: new Date(2025, 0), y: 677 },
+                                                    { x: new Date(2026, 0), y: 733 },
+                                                    { x: new Date(2027, 0), y: 584 },
+                                                    { x: new Date(2028, 0), y: 549 },
+                                                    { x: new Date(2029, 0), y: 524 },
+                                                    { x: new Date(2030, 0), y: 327 },
+                                                    { x: new Date(2031, 0), y: 327 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "북부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1568 },
+                                                    { x: new Date(2024, 0), y: 1516 },
+                                                    { x: new Date(2025, 0), y: 1419 },
+                                                    { x: new Date(2026, 0), y: 1437 },
+                                                    { x: new Date(2027, 0), y: 1381 },
+                                                    { x: new Date(2028, 0), y: 1242 },
+                                                    { x: new Date(2029, 0), y: 1114 },
+                                                    { x: new Date(2030, 0), y: 998 },
+                                                    { x: new Date(2031, 0), y: 877 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "남부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 885 },
+                                                    { x: new Date(2024, 0), y: 817 },
+                                                    { x: new Date(2025, 0), y: 782 },
+                                                    { x: new Date(2026, 0), y: 817 },
+                                                    { x: new Date(2027, 0), y: 711 },
+                                                    { x: new Date(2028, 0), y: 668 },
+                                                    { x: new Date(2029, 0), y: 614 },
+                                                    { x: new Date(2030, 0), y: 459 },
+                                                    { x: new Date(2031, 0), y: 440 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "동대구",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1029 },
+                                                    { x: new Date(2024, 0), y: 944 },
+                                                    { x: new Date(2025, 0), y: 905 },
+                                                    { x: new Date(2026, 0), y: 960 },
+                                                    { x: new Date(2027, 0), y: 829 },
+                                                    { x: new Date(2028, 0), y: 788 },
+                                                    { x: new Date(2029, 0), y: 746 },
+                                                    { x: new Date(2030, 0), y: 544 },
+                                                    { x: new Date(2031, 0), y: 530 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "달성",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 1327 },
+                                                    { x: new Date(2024, 0), y: 1437 },
+                                                    { x: new Date(2025, 0), y: 1344 },
+                                                    { x: new Date(2026, 0), y: 1215 },
+                                                    { x: new Date(2027, 0), y: 1494 },
+                                                    { x: new Date(2028, 0), y: 1265 },
+                                                    { x: new Date(2029, 0), y: 1017 },
+                                                    { x: new Date(2030, 0), y: 1309 },
+                                                    { x: new Date(2031, 0), y: 1032 }
+                                                ]
+                                             },
+                                             {
+                                                type: "spline",
+                                                showInLegend: true,
+                                                name: "중부",
+                                                yValueFormatString: "#,##0",
+                                                xValueFormatString: "YYYY",
+                                                dataPoints: [
+                                                    { x: new Date(2023, 0), y: 673 },
+                                                    { x: new Date(2024, 0), y: 656 },
+                                                    { x: new Date(2025, 0), y: 602 },
+                                                    { x: new Date(2026, 0), y: 615 },
+                                                    { x: new Date(2027, 0), y: 598 },
+                                                    { x: new Date(2028, 0), y: 531 },
+                                                    { x: new Date(2029, 0), y: 486 },
+                                                    { x: new Date(2030, 0), y: 443 },
+                                                    { x: new Date(2031, 0), y: 381 }
+                                                ]
+                                            }]
+                                        });
+                                        chart1.render();
+                                        chart2.render();
+                                        }
+                                        </script>
+                                        <body>
+                                        <div id="chartContainer1" style="height: 370px; width: 100%;"></div>
+                                        <div id="chartContainer2" ></div>
+                                        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                                        </body>
+                                    </div>
+                                </td>
+                            </tr>
+                    </tfoot>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_body %}
+<!-- Data Tables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}

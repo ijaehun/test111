@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tables {% endblock %}
+
+
+{% block css %}
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">지역별 안전 예측</h1>
+    <p class="mb-4">10개년 지역별 안전 예측</p>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <!-- <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div> -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>예측년도</th>
+                            <th>ARIMA모델</th>
+                            <th>앙상블모델</th>
+                            <th>RNN모델</th>
+                            <th>LSTM모델</th>
+                            <th>DLinear모델</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for db in df %}
+                            <tr>
+                                <td>{{ db.예측년도 }}</td>
+                                <td>{{ db.ARIMA모델 }}</td>
+                                <td>{{ db.앙상블모델 }}</td>
+                                <td>{{ db.RNN모델 }}</td>
+                                <td>{{ db.LSTM모델 }}</td>
+                                <td>{{ db.DLinear모델 }}</td>
+                            </tr>
+                        {% endfor %}                      
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="15">
+                                <div class="chart-area">
+                                    <script>
+                                        window.onload = function () {
+                                        
+                                        var chart = new CanvasJS.Chart("chartContainer", {
+                                            animationEnabled: true,
+                                            title:{
+                                                text: "사고안전 예측 건수"
+                                            },
+                                            axisX: {
+                                                valueFormatString: "YYYY년"
+                                            },
+                                            axisY: {
+                                                title: "예측값",
+                                                suffix: " 건"
+                                            },
+                                            legend: {
+                                                    cursor: "pointer",
+                                                    itemclick: toggleDataSeries
+                                            },
+                                            toolTip:{
+                                                shared: true
+                                            },
+                                            data: [{
+                                                name: "ARIMA",
+                                                type: "spline",
+                                                yValueFormatString: "# 건",
+                                                showInLegend: true,
+                                                dataPoints: [
+                                                    { label: "2024년", y: 39 },
+                                                    { label: "2025년", y: 42 },
+                                                    { label: "2026년", y: 59 },
+                                                    { label: "2027년", y: 49 },
+                                                    { label: "2028년", y: 51 },
+                                                    { label: "2029년", y: 89 },
+                                                    { label: "2030년", y: 41 },
+                                                    { label: "2031년", y: 74 },
+                                                    { label: "2032년", y: 56 },
+                                                    { label: "2033년", y: 57 },
+                                                ]
+                                            },
+                                            {
+                                                name: "앙상블",
+                                                type: "spline",
+                                                yValueFormatString: "# 건",
+                                                showInLegend: true,
+                                                dataPoints: [
+                                                    { label: "2024년", y: 85 }, 
+                                                    { label: "2025년", y: 62 },
+                                                    { label: "2026년", y: 54 },
+                                                    { label: "2027년", y: 38 },
+                                                    { label: "2028년", y: 72 },
+                                                    { label: "2029년", y: 44 },
+                                                    { label: "2030년", y: 37 },
+                                                    { label: "2031년", y: 79 },
+                                                    { label: "2032년", y: 71 },
+                                                    { label: "2033년", y: 96 },
+                                                ]
+                                            },
+                                            {
+                                                name: "RNN",
+                                                type: "spline",
+                                                yValueFormatString: "# 건",
+                                                showInLegend: true,
+                                                dataPoints: [
+                                                    { label: "2024년", y: 48 }, 
+                                                    { label: "2025년", y: 88 },
+                                                    { label: "2026년", y: 84 },
+                                                    { label: "2027년", y: 100 },
+                                                    { label: "2028년", y: 38 },
+                                                    { label: "2029년", y: 55 },
+                                                    { label: "2030년", y: 62 },
+                                                    { label: "2031년", y: 88 },
+                                                    { label: "2032년", y: 99 },
+                                                    { label: "2033년", y: 59 },
+                                                ]
+                                            },
+                                            {
+                                                name: "LSTM",
+                                                type: "spline",
+                                                yValueFormatString: "# 건",
+                                                showInLegend: true,
+                                                dataPoints: [
+                                                    { label: "2024년", y: 51 }, 
+                                                    { label: "2025년", y: 53 },
+                                                    { label: "2026년", y: 99 },
+                                                    { label: "2027년", y: 96 },
+                                                    { label: "2028년", y: 72 },
+                                                    { label: "2029년", y: 52 },
+                                                    { label: "2030년", y: 59 },
+                                                    { label: "2031년", y: 96 },
+                                                    { label: "2032년", y: 98 },
+                                                    { label: "2033년", y: 87 },
+                                                ]
+                                            },
+                                            {
+                                                name: "DLinear",
+                                                type: "spline",
+                                                yValueFormatString: "# 건",
+                                                showInLegend: true,
+                                                dataPoints: [
+                                                    { label: "2024년", y: 80 }, 
+                                                    { label: "2025년", y: 65 },
+                                                    { label: "2026년", y: 33 },
+                                                    { label: "2027년", y: 100 },
+                                                    { label: "2028년", y: 34 },
+                                                    { label: "2029년", y: 63 },
+                                                    { label: "2030년", y: 98 },
+                                                    { label: "2031년", y: 53 },
+                                                    { label: "2032년", y: 73 },
+                                                    { label: "2033년", y: 54 },
+                                                ]
+                                            }]
+                                        });
+                                        chart.render();
+                                        
+                                        function toggleDataSeries(e) {
+                                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                                e.dataSeries.visible = false;
+                                            } else {
+                                                e.dataSeries.visible = true;
+                                            }
+                                            e.chart.render();
+                                        }
+                                        }
+                                        </script>
+                                        </head>
+                                        <body>
+                                            <div id="chartContainer" style="height: 290px; width: 100%;"></div>
+                                            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                                        </body>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_body %}
+<!-- Data Tables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}
