@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Index {% endblock %}
+
+{% block container_fluid %}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">대시보드</h1>
+    </div>
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-xl-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">개요</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    
+                            <thead>
+                                
+                                <script>
+                                    window.onload = function () {
+                            
+                                        var chart1 = new CanvasJS.Chart("chartContainer1", {
+                                            animationEnabled: true,
+                                            title: {
+                                                text: "####",
+                                                fontSize: 25
+                                            },
+                                            axisX: {
+                                                valueFormatString: "YYYY"
+                                            },
+                                            
+                                            
+                                            // axisY: {
+                                            // title: "사고 수",
+                                            // valueFormatString: "0",
+                                            // suffix: "건",
+                                            // reverse: false,
+                                            // minimum: 0 // y축 시작점을 0으로 설정
+                                            // },
+                                            // toolTip: {
+                                            //     shared: true
+                                            // },
+
+                                            // axisY2: {
+                                            // title: "사고 수",
+                                            // valueFormatString: "0",
+                                            // interval: 1,
+                                            // suffix: "건",
+                                            // reverse: false,
+                                            // minimum: 500 // y축 시작점을 0으로 설정
+                                            // },
+                                            
+                                            axisY: {
+                                                // title: "단위(건, 척)",
+                                                suffix: "",
+                                                
+                                            },
+                                            axisY2: {
+                                                // title: "단위(명)",
+                                                suffix: "",
+                                                titleFontColor: "#3FC9C9",
+                                                // lineColor: "#3FC9C9",
+                                                labelFontColor: "#3FC9C9",
+                                                // tickColor: "#3FC9C9"
+                                            },
+
+                                            toolTip: {
+                                                shared: true
+                                            },
+                                            legend: {
+                                                cursor: "pointer",
+                                                itemclick: toggleDataSeries
+                                            },
+                                            
+                                            data: [
+                                                {
+                                                    type: "column",
+                                                    name: "##",
+                                                    color: "#4761DE",
+                                                    showInLegend: "true",
+                                                    yValueFormatString: "###",
+                                                    xValueFormatString: "YYYY",
+                                                    dataPoints: [
+                                                        { label: "2017년", y: 2585 },
+                                                        { label: "2018년", y: 2671 },
+                                                        { label: "2019년", y: 2971 },
+                                                        { label: "2020년", y: 3156 },
+                                                        { label: "2021년", y: 2720 },
+                                                        { label: "2022년", y: 2863 }
+                                                    ]
+                                                },
+                                                {
+                                                    type: "column",
+                                                    name: "##",
+                                                    showInLegend: "true",
+                                                    color: "#879CFF",
+                                                    yValueFormatString: "###",
+                                                    xValueFormatString: "YYYY",
+                                                    dataPoints: [
+                                                        { label: "2017년", y: 2882 },
+                                                        { label: "2018년", y: 2968 },
+                                                        { label: "2019년", y: 3274 },
+                                                        { label: "2020년", y: 3535 },
+                                                        { label: "2021년", y: 3053},
+                                                        { label: "2022년", y: 3167 }
+                                                    ]
+                                                },
+                                                {
+                                                    type: "spline",
+                                                    name: "##",
+                                                    showInLegend: "true",
+                                                    yValueFormatString: "###",
+                                                    color: "#3FC9C9",
+                                                    axisYType: "secondary",
+                                                    axisYIndex: 1,
+                                                    xValueFormatString: "YYYY",
+                                                    dataPoints: [
+                                                        { label: "2017년", y: 523 },
+                                                        { label: "2018년", y: 455 },
+                                                        { label: "2019년", y: 547 },
+                                                        { label: "2020년", y: 553 },
+                                                        { label: "2021년", y: 512 },
+                                                        { label: "2022년", y: 412 }
+                                                    ]
+                                                }
+                                            ]
+                                        });
+                                        chart1.render();
+                                        function toggleDataSeries(e) {
+                                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                                e.dataSeries.visible = false;
+                                            }
+                                            else {
+                                                e.dataSeries.visible = true;
+                                            }
+                                            chart1.render();
+                                        }
+                            
+                                        var chart2 = new CanvasJS.Chart("chartContainer2", {
+                                            animationEnabled: true,
+                                            title: {
+                                                text: "####",
+                                                fontSize: 25
+                                            },
+                                            axisY: {
+                                                valueFormatString: "####",
+                                                suffix: "",
+                                                minimum: 10,
+                                                
+                                            },
+                                            toolTip: {
+                                                shared: true
+                                            },
+                                            legend: {
+                                                cursor: "pointer",
+                                                itemclick: toggleDataSeries2
+                                            },
+                                            data: [{
+                                                yValueFormatString: "#,###",
+                                                xValueFormatString: "YYYY",
+                                                name: "##",
+                                                showInLegend: true,
+                                                type: "spline",
+                                                color: "#FB2877",
+                                                dataPoints: [
+                                                    { label: "2017년", y: 145 },
+                                                    { label: "2018년", y: 102 },
+                                                    { label: "2019년", y: 98 },
+                                                    { label: "2020년", y: 126 },
+                                                    { label: "2021년", y: 120 },
+                                                    { label: "2022년", y: 99 }
+                                                ]},
+                                                {
+                                                yValueFormatString: "#,###",
+                                                xValueFormatString: "YYYY",
+                                                name: "##",
+                                                showInLegend: true,
+                                                type: "spline",
+                                                color: "#0082B3",
+                                                dataPoints: [
+                                                    { label: "2017년", y: 378 },
+                                                    { label: "2018년", y: 353 },
+                                                    { label: "2019년", y: 449 },
+                                                    { label: "2020년", y: 427 },
+                                                    { label: "2021년", y: 392 },
+                                                    { label: "2022년", y: 313 }
+                                                ]
+                                                },
+                                                {
+                                                yValueFormatString: "#,###",
+                                                xValueFormatString: "YYYY",
+                                                name: "##",
+                                                showInLegend: true,
+                                                type: "spline",
+                                                color: "#FF9933",
+                                                dataPoints: [
+                                                    { label: "2017년", y: 523 },
+                                                    { label: "2018년", y: 455 },
+                                                    { label: "2019년", y: 547 },
+                                                    { label: "2020년", y: 553 },
+                                                    { label: "2021년", y: 512 },
+                                                    { label: "2022년", y: 412 }
+                                                ]
+                                            }
+                                        ],
+                                        
+                                        });
+                                        chart2.render();
+                                        function toggleDataSeries2(e) {
+                                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                                e.dataSeries.visible = false;
+                                            }
+                                            else {
+                                                e.dataSeries.visible = true;
+                                            }
+                                            chart2.render();
+                                        }
+                            
+                                        var chart3 = new CanvasJS.Chart("chartContainer3", {
+                                            animationEnabled: true,
+                                            title: {
+                                                text: "####",
+                                                fontSize: 25
+                                            },
+                                            axisY: {
+                                                valueFormatString: "####",
+                                                suffix: "",
+                                                minimum: 10,
+                                                
+                                            },
+                                            toolTip: {
+                                                shared: true
+                                            },
+                                            legend: {
+                                                cursor: "pointer",
+                                                itemclick: toggleDataSeries3
+                                            },
+                                            data: [
+                                                {
+                                                yValueFormatString: "#,###",
+                                                xValueFormatString: "YYYY",
+                                                name: "##",
+                                                showInLegend: true,
+                                                type: "spline",
+                                                dataPoints: [
+                                                    { label: "2017년", y: 1939 },
+                                                    { label: "2018년", y: 2013 },
+                                                    { label: "2019년", y: 2134 },
+                                                    { label: "2020년", y: 2331 },
+                                                    { label: "2021년", y: 1971 },
+                                                    { label: "2022년", y: 1904 }
+                                                ]},
+                                                {
+                                                yValueFormatString: "#,###",
+                                                xValueFormatString: "YYYY",
+                                                name: "##",
+                                                showInLegend: true,
+                                                type: "spline",
+                                                dataPoints: [
+                                                    { label: "2017년", y: 127 },
+                                                    { label: "2018년", y: 112 },
+                                                    { label: "2019년", y: 111 },
+                                                    { label: "2020년", y: 139 },
+                                                    { label: "2021년", y: 110 },
+                                                    { label: "2022년", y: 147 }
+                                                ]
+                                            },
+                                            {
+                                                yValueFormatString: "#,###",
+                                                xValueFormatString: "YYYY",
+                                                name: "##",
+                                                showInLegend: true,
+                                                type: "spline",
+                                                dataPoints: [
+                                                    { label: "2017년", y: 472 },
+                                                    { label: "2018년", y: 469 },
+                                                    { label: "2019년", y: 586 },
+                                                    { label: "2020년", y: 647 },
+                                                    { label: "2021년", y: 597 },
+                                                    { label: "2022년", y: 639 }
+                                                ]
+                                            },
+                                            {
+                                                yValueFormatString: "#,###",
+                                                xValueFormatString: "YYYY",
+                                                name: "##",
+                                                showInLegend: true,
+                                                type: "spline",
+                                                dataPoints: [
+                                                    { label: "2017년", y: 134 },
+                                                    { label: "2018년", y: 130 },
+                                                    { label: "2019년", y: 203 },
+                                                    { label: "2020년", y: 176 },
+                                                    { label: "2021년", y: 135 },
+                                                    { label: "2022년", y: 190 }
+                                                ]
+                                            }
+                                            
+                                        ],
+                                        });
+                                        chart3.render();
+                                        function toggleDataSeries3(e) {
+                                            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                                e.dataSeries.visible = false;
+                                            }
+                                            else {
+                                                e.dataSeries.visible = true;
+                                            }
+                                            chart3.render();
+                                        }
+                                    }
+
+                                    
+                                </script>
+                            </thead>
+                            <tbody>
+                                <div id="chartContainer1" style="height: 360px; width: 98%;"></div>
+                                <br>
+                                <div id="chartContainer2" style="height: 360px; width: 98%;"></div>
+                                <br>
+                                <div id="chartContainer3" style="height: 360px; width: 98%;"></div>
+                                <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+{% block js_body %}
+   {% include 'theme/components/charts_scripts.html' %}
+{% endblock %}

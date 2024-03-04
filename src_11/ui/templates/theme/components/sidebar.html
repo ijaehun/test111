@@ -1,0 +1,181 @@
+
+{% load static %}
+
+    <ul class="navbar-nav bg-white1 sidebar sidebar-dark accordion" id="accordionSidebar">
+    
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'users:index_url' %}">
+        <img class="img-fluid transparency-grid" src="{% static 'resource/logos/samsung_1.png' %}" ondragstart="return false;" data-hj-suppress="true" data-v-1ab68894="" style="max-width: 90%; height: auto;">
+        <div class="sidebar-brand-text mx-3"></div>
+      </a>
+
+      
+      <!-- https://i.ibb.co/D57B2Sw/2023-11-22-093420-removebg-preview-1.png -->
+      <!-- <a href="https://imgbb.com/"><img src="https://i.ibb.co/CvJCjmx/2023-11-22-093920-removebg-preview.png" alt="2023-11-22-093920-removebg-preview" border="0"></a> -->
+      <!-- <a href="https://imgbb.com/"><img src="https://i.ibb.co/ypF8C2H/2023-11-22-093420-removebg-preview-2.png" alt="2023-11-22-093420-removebg-preview-2" border="0"></a> -->
+      <!-- <a href="https://imgbb.com/"><img src="https://i.ibb.co/yFX4rft/2023-11-22-094626.png" alt="2023-11-22-094626" border="0"></a><br /><a target='_blank' href='https://emoticoncentral.com/category/playful'>playful emoticons</a><br /> -->
+      <!-- <a href="https://ibb.co/jVY3MP4"><img src="https://i.ibb.co/N1qWjdY/1.png" alt="1" border="0"></a> -->
+      <!-- <a href="https://ibb.co/5xZKxzc"><img src="https://i.ibb.co/LhKNhqp/2.png" alt="2" border="0"></a><br /><a target='_blank' href='https://emoticoncentral.com/category/rage'>rage smileys</a><br /> -->
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="{% url 'users:index_url' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li> -->
+
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider"> -->
+
+      <!-- Heading -->
+      <!-- <div class="sidebar-heading">
+        Interface
+      </div> -->
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Components</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item" href="{% url 'users:buttons_url' %}">Buttons</a>
+            <a class="collapse-item" href="{% url 'users:cards_url' %}">Cards</a>
+          </div>
+        </div>
+      </li> -->
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:index_url' %}">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>대시보드</span></a>
+      </li>
+            
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:tables_url' %}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>사외반출입 최적 블록 선정 시뮬레이션</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:tables1_url' %}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>사외반출입 선정 블록 분석 결과</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:tables2_url' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>사외반출입 물류 스케줄 최적화</span></a>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-table"></i>
+          <span>지역별 안전 예측</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">경기, 인천</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">부산, 경남</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">전북, 충남</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">전남, 제주</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">울산</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">강원, 경북</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">서해 EEZ</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">남해 EEZ</a>
+            <a class="collapse-item" href="{% url 'users:tables1_url' %}">동해 EEZ</a>
+          </div>
+        </div>
+      </li> -->
+
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider"> -->
+
+      <!-- Heading -->
+      <!-- <div class="sidebar-heading"> -->
+        <!-- Addons -->
+      <!-- </div> -->
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pages</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Login Screens:</h6>
+            <a class="collapse-item" href="{% url 'users:login_url' %}">Login</a>
+            <a class="collapse-item" href="{% url 'users:register_url' %}">Register</a>
+            <a class="collapse-item" href="{% url 'users:forgot_password_url' %}">Forgot Password</a>
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="{% url 'users:page_not_found_url' %}">404 Page</a>
+            <a class="collapse-item" href="{% url 'users:blank_page_url' %}">Blank Page</a>
+          </div>
+        </div>
+      </li> -->
+
+
+
+      <!-- Nav Item - Charts -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:charts_url' %}">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Charts</span></a>
+      </li> -->
+
+      <!-- Nav Item - Tables -->
+
+      <!-- Nav Item - Tables -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:tables1_url' %}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Students Forcast of Region</span></a>
+      </li> -->
+      
+      <!-- Nav Item - Tables -->
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:tables2_url' %}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>오염수준 예측</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'users:simulation_count_url' %}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>운영시나리오별 시뮬레이션</span></a>
+      </li> -->
+
+      <!-- Nav Item - Dashboard -->
+      <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>운영시나리오별 시뮬레이션</span>
+        </a>
+          <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="{% url 'users:simulation_count_url' %}">시나리오1 시뮬레이션</a>
+              <a class="collapse-item" href="{% url 'users:simulation_count_url' %}">시나리오2 시뮬레이션</a>
+            </div>
+          </div>
+      </li> -->
+
+
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>

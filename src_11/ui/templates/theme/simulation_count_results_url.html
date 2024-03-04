@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tables {% endblock %}
+
+
+{% block css %}
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">교원 산출 시뮬레이션</h1>
+    <p class="h4 mb-2  text-gray-800">결과</p>
+    <div class="card shadow mb-4">
+        <!-- <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div> -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>  
+                            <th>학교명</th>
+                            <th>1년</th>
+                            <th>2년</th>
+                            <th>3년</th>
+                            <th>4년</th>
+                            <th>5년</th>
+                            <th>6년</th>
+                            <th>7년</th>
+                            <th>8년</th>
+                            <th>9년</th>
+                            <th>10년</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for db in df %}
+                        <tr> 
+                            <td>{{ db.학교명 }}</td>
+                            <td>{{ db.필요교원수0 }}</td>
+                            <td>{{ db.필요교원수1 }}</td>
+                            <td>{{ db.필요교원수2 }}</td>
+                            <td>{{ db.필요교원수3 }}</td>
+                            <td>{{ db.필요교원수4 }}</td>
+                            <td>{{ db.필요교원수5 }}</td>
+                            <td>{{ db.필요교원수6 }}</td>
+                            <td>{{ db.필요교원수7 }}</td>
+                            <td>{{ db.필요교원수8 }}</td>
+                            <td>{{ db.필요교원수9 }}</td> 
+                        </tr>
+                        {% endfor %}    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_body %}
+<!-- Data Tables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}

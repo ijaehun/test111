@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tables {% endblock %}
+
+
+{% block css %}
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block container_fluid %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">사외반출입 최적 블로 선정 결과</h1>
+    <!-- <p class="mb-4">사고안전 10개년 사고안전 예측 건수</p> -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <!-- <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div> -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    
+                    <thead>
+                        
+                        <script>
+                            window.onload = function () {
+                    
+                                var chart1 = new CanvasJS.Chart("chartContainer1", {
+                                    animationEnabled: true,
+                                    title: {
+                                        text: "WKA_CD",
+                                        fontSize: 25
+                                    },
+                                    axisX: {
+                                        labelAngle: 45, // X 축 레이블의 각도 조절
+                                    },
+
+                                    axisY: {
+                                        suffix: "",
+                                        
+                                    },
+                                    toolTip: {
+                                        shared: true
+                                    },
+                                    legend: {
+                                        cursor: "pointer",
+                                        itemclick: toggleDataSeries
+                                    },
+                                    
+                                    data: [
+                                    {
+                                        type: "column",
+                                        dataPoints: [
+                                            { label: "HS", y: 31 },
+                                            { label: "3R", y: 24},
+                                            { label: "3L", y: 21 },
+                                            { label: "DK", y: 21 },
+                                            { label: "BN", y: 16 },
+                                            { label: "HZ", y: 14 },
+                                            { label: "3J", y: 14 },
+                                            { label: "OB", y: 13 },
+                                            { label: "OF", y: 11 },
+                                            { label: "PT", y: 9},
+                                            { label: "HN", y: 9},
+                                            { label: "3N", y: 7},
+                                            { label: "3P", y: 6},
+                                        ]
+                                    }
+                                    ]
+                                });
+                                chart1.render();
+
+
+                                function toggleDataSeries(e) {
+                                    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                        e.dataSeries.visible = false;
+                                    }
+                                    else {
+                                        e.dataSeries.visible = true;
+                                    }
+                                    chart1.render();
+                                }
+                    
+                                var chart2 = new CanvasJS.Chart("chartContainer2", {
+                                    animationEnabled: true,
+                                    title: {
+                                        text: "LOGI_CHK_DESC",
+                                        fontSize: 25
+                                    },
+                                    axisY: {
+                                        valueFormatString: "####",
+                                        suffix: "",
+                                    },
+                                    toolTip: {
+                                        shared: true
+                                    },
+                                    legend: {
+                                        cursor: "pointer",
+                                        itemclick: toggleDataSeries2
+                                    },
+                                    data: [
+                                    {
+                                        type: "column",
+                                        dataPoints: [
+                                            { label: "선행의장", y: 127 },
+                                            { label: "조립", y: 63},
+                                            { label: "도장", y: 58 },
+                                        ]
+                                    }
+                                    ]
+                                });
+                                chart2.render();
+                                function toggleDataSeries2(e) {
+                                    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                        e.dataSeries.visible = false;
+                                    }
+                                    else {
+                                        e.dataSeries.visible = true;
+                                    }
+                                    chart2.render();
+                                }
+                    
+                                var chart3 = new CanvasJS.Chart("chartContainer3", {
+                                    animationEnabled: true,
+                                    title: {
+                                        text: "후공정 대기 기간",
+                                        fontSize: 25
+                                    },
+                                    axisX: {
+                                        labelAngle: 45, // X 축 레이블의 각도 조절
+                                    },
+                                    axisY: {
+                                        valueFormatString: "####",
+                                        suffix: "",
+                                    },
+                                    toolTip: {
+                                        shared: true
+                                    },
+                                    legend: {
+                                        cursor: "pointer",
+                                        itemclick: toggleDataSeries3
+                                    },
+                                    data: [
+                                    {
+                                        type: "column",
+                                        dataPoints: [
+                                            { label: "-2일", y: 16 },
+                                            { label: "0일", y: 16},
+                                            { label: "-1일", y: 11 },
+                                            { label: "6일", y: 10 },
+                                            { label: "4일", y: 9 },
+                                            { label: "3일", y: 8 },
+                                            { label: "5일", y: 8 },
+                                            { label: "10일", y: 7 },
+                                            { label: "14일", y: 3},
+                                            { label: "-3일", y: 2},
+                                            { label: "11일", y: 1},
+                                            { label: "-6일", y: 1},
+                                            { label: "-4일", y: 1},
+                                            { label: "-9일", y: 1},
+                                            { label: "67일", y: 1},
+                                            { label: "-8일", y: 1},
+                                            { label: "31일", y: 1},
+                                            { label: "12일", y: 1},
+                                            { label: "17일", y: 1},
+                                            { label: "-18일", y: 1},
+
+                                        ]
+                                    }
+                                    ]
+                                });
+                                chart3.render();
+                                function toggleDataSeries3(e) {
+                                    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                        e.dataSeries.visible = false;
+                                    }
+                                    else {
+                                        e.dataSeries.visible = true;
+                                    }
+                                    chart3.render();
+                                }
+                            }
+                        </script>
+                    </thead>
+                    <tbody>
+                        <div id="chartContainer1" style="height: 360px; width: 98%;"></div>
+                        <br>
+                        <div id="chartContainer2" style="height: 360px; width: 98%;"></div>
+                        <br>
+                        <div id="chartContainer3" style="height: 360px; width: 98%;"></div>
+                        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js_body %}
+<!-- Data Tables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}
