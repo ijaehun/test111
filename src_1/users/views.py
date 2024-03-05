@@ -37,23 +37,12 @@ class LoginView(APIView):
         return Response({'status': 200})
 
 class RegisterView(APIView):
+    def get(self, request, *args, **kwargs):
+        return render(request, "theme/register.html", {})
 
-    def register(request):
-        if request.method == 'GET':
-            return render(request, "register.html")
-        elif request.method == 'POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            re_password = request.POST['re-password']
+    def post(self, request, *args, **kwargs):
 
-        user = User(
-                    Username = username,
-                    password = password
-                )
-
-        user.save()
-
-        return render(request, "register.html")
+        return Response({'status': 200})
 
 class ForgotPasswordView(APIView):
     def get(self, request, *args, **kwargs):
@@ -96,7 +85,8 @@ class Tables_result_View(APIView):
         dt = pd.read_csv("./data/block.csv",encoding="cp949")
         x = _Util(dt)
         res = x._prepData()
-        results = res.loc[res['LOGI_BUFFER_TIME']>int(option1),:]
+        
+        results = res.loc[res['LOGI_BUFFER_TIME']>int(option1),:].sort_values(by='RANK').head(int(option2))
         
         results.columns = results.columns.str.replace(' ', '_').str.replace('.', '_')
         # data = pd.concat([data2,data3,data4,data5],axis=1)
