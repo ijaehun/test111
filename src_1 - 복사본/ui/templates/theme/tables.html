@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Tables {% endblock %}
+
+
+{% block css %}
+<!-- Custom styles for this page -->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+{% block container_fluid %}
+
+<script>
+
+    // function send() {
+    
+    //     document.getElementById( 'jb' ).value = '100';
+    //     setTimeout(function() {
+    //     show("test 2");
+    //     }, 3000);
+        
+    //     alert("시뮬레이션 진행 중");
+    //     document.getElementById("contents").submit();
+    //     }
+    
+    function startProgress() {
+          const progressBar = document.getElementById('progressBar');
+          let currentValue = 0;
+          const duration = 1000; // 10초(밀리초)
+    
+          const interval = setInterval(() => {
+            currentValue += 1;
+            progressBar.value = currentValue;
+    
+            if (currentValue >= 100) {
+              clearInterval(interval);
+              triggerAlarm();
+            }
+          }, duration / 100);
+        }
+    
+    function triggerAlarm() {
+        // 여기에 알람을 울리는 코드를 넣으세요 (예: alert 사용)
+        alert('분석 완료');
+        document.getElementById("contents").submit();
+    }
+    
+
+</script>
+
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">사외적치블록 선정 시뮬레이터</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <form id="contents" name="contents" method="get" action="{% url 'users:tables_result_url' %}">
+                            <br>
+                            {% csrf_token %}
+                            <p>
+                            <input type="file" name="myfile" accept=".csv">
+                            </p>
+                            
+                            <p>
+                            잔여공정일 기준 : <input name="option1" type="text">
+                            </p>
+                            
+                            <p>
+                            사외적치 블록 수 기준 : <input name="option2" type="text">
+                            </p>
+                            
+                            <p>
+                            <button type="button" onclick="startProgress();">분석진행</button>
+                            </p>
+                            
+                            <p>
+                                <progress class="progress" id="progressBar" value="0" max="100" id="jb"></progress>
+                            </p>
+                        </form>
+                    </thead>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js_body %}
+<!-- Data Tables -->
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+{% endblock %}
